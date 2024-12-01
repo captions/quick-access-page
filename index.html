@@ -51,6 +51,7 @@
             border-radius: 50px; 
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
             overflow: hidden; 
+            margin-bottom: 20px; /* 给搜索框和标题之间增加间距 */
         } 
  
         input[type="text"] { 
@@ -106,23 +107,74 @@
     <div class="title">快速直达</div> 
     <div class="search-container"> 
         <input type="text" id="searchInput" placeholder="输入指定字符"> 
-        <button onclick="redirect()">&#128269;</button> 
     </div> 
     <div id="options" class="options-container"></div> 
  
     <script> 
         // 定义关键词和对应网站的映射 
         const mapping = { 
-            "weixinplay": ["http://play.google.com/store/apps/details?id=com.tencent.mm#:~:text=%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F"],  
+            "weixinplay": ["http://play.google.com/store/apps/details?id=com.tencent.mm"],   
             "weixinkuan": ["https://www.coolapk.com/apk/com.tencent.mm"],  
-            "taobao": ["https://www.taobao.com", "https://tmall.com"]  
+	    "viakuan": ["https://www.coolapk.com/apk/mark.via"],
+            "chenzhongjiangkuan": ["https://www.coolapk.com/apk/com.tencent.mm"], 
+            "chenzhongjiangbilibili": ["https://space.bilibili.com/251013709/video"],
+            "kuan": ["https://www.coolapk.com/apk/com.coolapk.market"],
+            "kuanxiaobian": ["http://www.coolapk.com/u/12202"],
+            "wuminglangbei": ["http://www.coolapk.com/u/470134"],
+            "juhesousuo": ["https://sousuo123.com/"],    
+            "dingzhibanapp": ["https://gitee.com/ww3w/dzb/blob/master/dzb.md"],  
+            "banbenguaidian": ["https://gitee.com/ww3w/dzb/blob/master/bbk.md"],
+            "iosapp": ["https://qianling.pw/ios-app/"],
+            "laodoujia": ["https://oldpods.mysxl.cn/"],
+            "gugebanben": ["https://pan.lanzoui.com/b0cxoc3mh"],
+            "axutongxue": ["https://data.newrank.cn/m/s.html?s=OyowODQ2KTxLQA"],
+            "axutongxuechuwujian": ["https://axutongxue.net/"],
+            "businiao": ["https://iui.su/"],
+            "4414": ["https://www.4414.cn/"],
+            "zhujiluntan": ["https://hostloc.com/forum-45-1.html"],
+            "chongbuluo": ["https://www.chongbuluo.com/"],
+            "mtluntan": ["https://bbs.binmt.cc/forum.php"],
+            "lzhan": ["https://linux.do/"],
+            "qqyinyuemeizuban": ["https://i3.mzres.com/resources/appStore/browser/views/browser-detail.html?packageName=com.meizu.media.music&app_id=1619000&versionCode=9006002&business=20"],
+	    "youkujingdianban": ["https://appgallery.huawei.com/#/app/C10360236"],
+	    "zhanneisousuo": ["https://www.google.com/search?hl=zh-CN&safe=off&num=30&as_qdr=d7&q=%20%22%E5%AE%9A%E5%88%B6%E7%89%88%22%20|%20%22%E6%8F%90%E5%8F%96%E8%87%AA%22%20|%20%22%E6%8F%90%E5%8F%96%E7%89%88%22%20-forum%20-page%20(site:zntx.cc%20|%20site:52pojie.cn%20|%20site:423down.com)"],
+	    "yizhouzixun": ["https://www.google.com/search?hl=zh-CN&safe=off&num=30&as_qdr=d7&q=%22Android%22%20%7C%20%22%E5%AE%89%E5%8D%93%22%20%7C%20%22IOS%22%20-page%20-search%20-mobile%20-tag%20-issue%20-tutorials%20-tech%20-os%20(site:ruancan.com%20|%20site:landiannews.com%20|%20site:solidot.org)"],
+            "weixingengxinrizhi": ["https://weixin.qq.com/cgi-bin/readtemplate?lang=zh_CN&t=weixin_faq_list&head=true"],
+            "weixinxiaochengxu": ["https://developers.weixin.qq.com/miniprogram/dev/framework/client-lib/version.html"],
+            "rebang": ["https://tophub.today/daily", "https://rebang.today/home?tab=top"]   
         }; 
  
         // 定义扩展关键词组 
         const keywordGroups = { 
-            "weixinplay": ["weixinplay", "微信谷歌", "wxg","wxp"], 
-            "weixinkuan": ["weixinkuan", "微信酷安", "wxk", "wxka"], 
-            "taobao": ["taobao", "淘宝", "天猫"] 
+            "weixinplay": ["weixinplay", "微信谷歌", "wxg", "wxp"],
+            "weixinkuan": ["weixinkuan", "微信酷安", "wxk", "wxka"],
+            "viakuan": ["viakuan", "viaka", "viak"],
+            "chenzhongjiangkuan": ["chenzhongjiangkuan", "czjk", "czjka", "晨钟酱k"],
+            "chenzhongjiangbilibili": ["chenzhongjiangbilibili", "czjb", "czjbz", "晨钟酱b"],
+            "kuan": ["kuan", "kuan", "酷安", "ka"],
+            "kuanxiaobian": ["kuanxiaobian", "kaxb", "酷安小编"],
+            "wuminglangbei": ["wuminglangbei", "wmlb", "无名狼辈"],
+            "juhesousuo": ["juhesousuo", "jhss", "聚合搜索", "ss123"],
+            "dingzhibanapp": ["dingzhibanapp", "dzb", "定制版"],
+            "banbenguaidian": ["banbenguaidian", "bbk", "版本拐点", "拐点"],
+            "iosapp": ["iosapp", "ios", "ios旧版", "ios版本"],
+            "laodoujia": ["laodoujia", "laodoujia", "老豆荚", "ldj"],
+            "gugebanben": ["gugebanben", "ggbb", "hj", "谷歌版本"],
+            "axutongxue": ["axutongxue", "axtx", "阿虚同学", "阿虚公众号"],
+            "axutongxuechuwujian": ["axutongxuechuwujian", "cwj", "储物间", "阿虚储物间"],
+            "businiao": ["businiao", "bsn", "不死鸟"],
+            "4414": ["4414", "4414z", "站长"],
+            "zhujiluntan": ["zhujiluntan", "主机论坛", "zjlt"],
+            "chongbuluo": ["chongbuluo", "虫部落", "cbl"],
+            "mtluntan": ["mtluntan", "mt", "MT论坛", "mt论坛"],
+            "lzhan": ["lzhan", "lz", "L站", "l站", "Lzhan"],
+            "qqyinyuemeizuban": ["qqyinyuemeizuban", "qq音乐魅族版", "qqyymzb", "qqyy", "mzb"],
+            "youkujingdianban": ["youkujingdianban", "优酷经典版", "ykjdb"],
+            "zhanneisousuo": ["zhanneisousuo", "znss", "站内搜索"],
+            "yizhouzixun": ["yizhouzixun", "yzzx", "一周资讯"],
+            "weixingengxinrizhi": ["weixingengxinrizhi", "wxgxrz", "wxgx", "gxrz", "微信更新日志"],
+            "weixinxiaochengxu": ["weixinxiaochengxu", "微信小程序", "wxxcx", "xcx", "小程序"],
+            "rebang": ["rebang", "热榜", "今日热榜", "jrrb", "rb"] 
         }; 
  
         // 根据输入找到对应的主关键词 
@@ -164,6 +216,13 @@
                 optionsContainer.style.display = "flex"; 
             } 
         } 
+ 
+        // 监听回车键事件 
+        document.getElementById("searchInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                redirect();
+            }
+        });
  
         // 页面加载完成后根据设备类型自动聚焦输入框或调用输入法 
         document.addEventListener("DOMContentLoaded", () => { 
