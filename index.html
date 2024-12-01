@@ -1,146 +1,183 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>快速直达</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+<!DOCTYPE html> 
+<html lang="zh-CN"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>快速直达</title> 
+    <!-- 使用本地 icon.png 文件作为页面图标 -->
+    <link rel="icon" href="icon.png" type="image/png"> 
+    <style> 
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        } 
+ 
+        html, body { 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; /* 禁止页面滚动 */ 
+        } 
+ 
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f9; 
+            justify-content: flex-start; 
+            padding-top: 251px; /* 桌面端偏上的距离 */
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* 禁止页面滚动 */
+        /* 媒体查询，适用于手机端 */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 275px; /* 手机端偏上的距离，可以根据实际情况调整 */
+            }
         }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .search-container {
-            display: flex;
-            width: 90%;
-            max-width: 500px;
-            background: #fff;
-            border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            padding: 15px 20px;
-            font-size: 18px;
-            border: none;
-            outline: none;
-        }
-
-        button {
-            padding: 0 20px;
-            font-size: 18px;
-            color: #fff;
-            background: #007BFF;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            transition: background 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        .options-container {
-            margin-top: 20px;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .options-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .options-container button:hover {
-            background: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <div class="title">快速直达</div>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="输入指定字符">
-        <button onclick="redirect()">&#128269;</button>
-    </div>
-    <div id="options" class="options-container"></div>
-
-    <script>
-        // 定义关键词和对应网站的映射
-        const mapping = {
-            "baidu": ["https://www.baidu.com"],
-            "google": ["https://www.google.com", "https://maps.google.com", "https://mail.google.com"],
-            "taobao": ["https://www.taobao.com", "https://tmall.com"]
-        };
-
-        // 跳转逻辑
-        function redirect() {
-            const input = document.getElementById("searchInput").value.trim();
-            const urls = mapping[input];
-            const optionsContainer = document.getElementById("options");
-
-            if (!urls) {
+ 
+        .title { 
+            font-size: 24px; 
+            font-weight: bold; 
+            color: #333; 
+            margin-bottom: 20px; 
+        } 
+ 
+        .search-container { 
+            display: flex; 
+            width: 90%; 
+            max-width: 500px; 
+            background: #fff; 
+            border-radius: 50px; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            overflow: hidden; 
+        } 
+ 
+        input[type="text"] { 
+            flex: 1; 
+            padding: 15px 20px; 
+            font-size: 18px; 
+            border: none; 
+            outline: none; 
+        } 
+ 
+        button { 
+            padding: 0 20px; 
+            font-size: 18px; 
+            color: #fff; 
+            background: #007BFF; 
+            border: none; 
+            cursor: pointer; 
+            outline: none; 
+            transition: background 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        } 
+ 
+        button:hover { 
+            background: #0056b3; 
+        } 
+ 
+        .options-container { 
+            margin-top: 20px; 
+            display: none; 
+            flex-direction: column; 
+            gap: 10px; 
+        } 
+ 
+        .options-container button { 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            background: #007BFF; 
+            color: #fff; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transition: background 0.3s ease; 
+        } 
+ 
+        .options-container button:hover { 
+            background: #0056b3; 
+        } 
+    </style> 
+</head> 
+<body> 
+    <div class="title">快速直达</div> 
+    <div class="search-container"> 
+        <input type="text" id="searchInput" placeholder="输入指定字符"> 
+        <button onclick="redirect()">&#128269;</button> 
+    </div> 
+    <div id="options" class="options-container"></div> 
+ 
+    <script> 
+        // 定义关键词和对应网站的映射 
+        const mapping = { 
+            "baidu": ["https://www.baidu.com"],  
+            "google": ["https://www.google.com", "https://maps.google.com", "https://mail.google.com"],  
+            "taobao": ["https://www.taobao.com", "https://tmall.com"]  
+        }; 
+ 
+        // 定义扩展关键词组 
+        const keywordGroups = { 
+            "baidu": ["baidu", "百度", "搜索"], 
+            "google": ["google", "谷歌", "搜索引擎"], 
+            "taobao": ["taobao", "淘宝", "天猫"] 
+        }; 
+ 
+        // 根据输入找到对应的主关键词 
+        function findMainKeyword(input) { 
+            for (const [mainKey, synonyms] of Object.entries(keywordGroups)) { 
+                if (synonyms.includes(input.toLowerCase())) { 
+                    return mainKey; 
+                } 
+            } 
+            return null; 
+        } 
+ 
+        // 跳转逻辑 
+        function redirect() { 
+            const input = document.getElementById("searchInput").value.trim(); 
+            const mainKeyword = findMainKeyword(input); 
+            const optionsContainer = document.getElementById("options"); 
+ 
+            if (!mainKeyword || !mapping[mainKeyword]) { 
                 alert("无效的指定字符，请检查输入！");
-                optionsContainer.style.display = "none";
-                return;
-            }
-
-            if (urls.length === 1) {
-                // 如果只有一个网站，直接跳转
-                window.location.href = urls[0];
+                optionsContainer.style.display = "none"; 
+                return; 
+            } 
+ 
+            const urls = mapping[mainKeyword]; 
+ 
+            if (urls.length === 1) { 
+                // 如果只有一个网站，直接跳转 
+                window.location.href = urls[0]; 
+            } else { 
+                // 如果有多个网站，显示选择按钮 
+                optionsContainer.innerHTML = ""; // 清空之前的选项 
+                urls.forEach(url => { 
+                    const button = document.createElement("button"); 
+                    button.textContent = url; 
+                    button.onclick = () => window.location.href = url; 
+                    optionsContainer.appendChild(button); 
+                }); 
+                optionsContainer.style.display = "flex"; 
+            } 
+        } 
+ 
+        // 页面加载完成后根据设备类型自动聚焦输入框或调用输入法 
+        document.addEventListener("DOMContentLoaded", () => { 
+            const inputField = document.getElementById("searchInput"); 
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints; // 检测是否为触摸设备
+            
+            if (isTouchDevice) {
+                // 手机端（触摸设备）默认调用输入法
+                inputField.setAttribute('autofocus', true);
             } else {
-                // 如果有多个网站，显示选择按钮
-                optionsContainer.innerHTML = ""; // 清空之前的选项
-                urls.forEach(url => {
-                    const button = document.createElement("button");
-                    button.textContent = url;
-                    button.onclick = () => window.location.href = url;
-                    optionsContainer.appendChild(button);
-                });
-                optionsContainer.style.display = "flex";
+                // 桌面端自动把光标定在搜索框里
+                inputField.focus();
             }
-        }
-
-        // 页面加载完成后自动聚焦输入框
-        document.addEventListener("DOMContentLoaded", () => {
-            const inputField = document.getElementById("searchInput");
-            inputField.focus(); // 自动聚焦
-        });
-    </script>
-</body>
+        }); 
+    </script> 
+</body> 
 </html>
