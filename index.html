@@ -113,7 +113,7 @@
     <script> 
         // 定义关键词和对应网站的映射 
         const mapping = { 
-            "weixinplay": ["http://play.google.com/store/apps/details?id=com.tencent.mm"],   
+            "weixinplay": ["http://play.google.com/store/apps/details?id=com.tencent.mm#:~:text=%E6%9B%B4%E6%96%B0%E6%97%A5%E6%9C%9F"],
             "weixinkuan": ["https://www.coolapk.com/apk/com.tencent.mm"],  
 	    "viakuan": ["https://www.coolapk.com/apk/mark.via"],
             "chenzhongjiangkuan": ["https://www.coolapk.com/apk/com.tencent.mm"], 
@@ -139,14 +139,16 @@
 	    "youkujingdianban": ["https://appgallery.huawei.com/#/app/C10360236"],
 	    "zhanneisousuo": ["https://www.google.com/search?hl=zh-CN&safe=off&num=30&as_qdr=d7&q=%20%22%E5%AE%9A%E5%88%B6%E7%89%88%22%20|%20%22%E6%8F%90%E5%8F%96%E8%87%AA%22%20|%20%22%E6%8F%90%E5%8F%96%E7%89%88%22%20-forum%20-page%20(site:zntx.cc%20|%20site:52pojie.cn%20|%20site:423down.com)"],
 	    "yizhouzixun": ["https://www.google.com/search?hl=zh-CN&safe=off&num=30&as_qdr=d7&q=%22Android%22%20%7C%20%22%E5%AE%89%E5%8D%93%22%20%7C%20%22IOS%22%20-page%20-search%20-mobile%20-tag%20-issue%20-tutorials%20-tech%20-os%20(site:ruancan.com%20|%20site:landiannews.com%20|%20site:solidot.org)"],
-            "weixingengxinrizhi": ["https://weixin.qq.com/cgi-bin/readtemplate?lang=zh_CN&t=weixin_faq_list&head=true"],
+            "weixingengxinrizhi": ["https://weixin.qq.com/updates"],
             "weixinxiaochengxu": ["https://developers.weixin.qq.com/miniprogram/dev/framework/client-lib/version.html"],
+            "fuliba": ["https://fuliba2023.net/"],
+            "xiaozhongruanjian": ["https://meta.appinn.net/tag/android"],
             "rebang": ["https://tophub.today/daily", "https://rebang.today/home?tab=top"]   
         }; 
  
         // 定义扩展关键词组 
         const keywordGroups = { 
-            "weixinplay": ["weixinplay", "微信谷歌", "wxg", "wxp"],
+            "weixinplay": ["weixinplay", "微信谷歌", "谷歌微信", "wxg", "wxp"],
             "weixinkuan": ["weixinkuan", "微信酷安", "wxk", "wxka"],
             "viakuan": ["viakuan", "viaka", "viak"],
             "chenzhongjiangkuan": ["chenzhongjiangkuan", "czjk", "czjka", "晨钟酱k"],
@@ -168,12 +170,14 @@
             "chongbuluo": ["chongbuluo", "虫部落", "cbl"],
             "mtluntan": ["mtluntan", "mt", "MT论坛", "mt论坛"],
             "lzhan": ["lzhan", "lz", "L站", "l站", "Lzhan"],
-            "qqyinyuemeizuban": ["qqyinyuemeizuban", "qq音乐魅族版", "qqyymzb", "qqyy", "mzb"],
-            "youkujingdianban": ["youkujingdianban", "优酷经典版", "ykjdb"],
+            "qqyinyuemeizuban": ["qqyinyuemeizuban", "qq音乐魅族版", "魅族版", "qqyymzb", "qqyy", "mzb"],
+            "youkujingdianban": ["youkujingdianban", "优酷经典版", "经典版", "jdb", "ykjdb"],
             "zhanneisousuo": ["zhanneisousuo", "znss", "站内搜索"],
             "yizhouzixun": ["yizhouzixun", "yzzx", "一周资讯"],
             "weixingengxinrizhi": ["weixingengxinrizhi", "wxgxrz", "wxgx", "gxrz", "微信更新日志"],
             "weixinxiaochengxu": ["weixinxiaochengxu", "微信小程序", "wxxcx", "xcx", "小程序"],
+            "fuliba": ["fuliba", "flb", "福利吧"],
+            "xiaozhongruanjian": ["xiaozhongruanjian", "xzrj", "小众软件"],
             "rebang": ["rebang", "热榜", "今日热榜", "jrrb", "rb"] 
         }; 
  
@@ -215,6 +219,9 @@
                 }); 
                 optionsContainer.style.display = "flex"; 
             } 
+
+		// 跳转后清空搜索框
+            document.getElementById("searchInput").value = '';
         } 
  
         // 监听回车键事件 
